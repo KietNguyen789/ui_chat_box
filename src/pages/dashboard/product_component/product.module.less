@@ -1,0 +1,86 @@
+// product.module.less
+@keyframes zoom {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.6);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.wrapper {
+    position: relative;
+    // background-color: red; //linear-gradient(270deg, rgba(71, 172, 86, 0), rgba(71, 172, 86, .2));
+
+    .productWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        width: 90%;
+        height: 95%;
+        z-index: 10;
+        background: linear-gradient(270deg, rgba(71, 172, 86, 0), rgba(71, 172, 86, .2)) !important;
+        margin-top: 50px;
+
+        // Responsive overrides
+        @media (min-width: 640px) {
+            // sm:
+            height: 490px;
+        }
+
+        @media (min-width: 1024px) {
+            // lg:
+            width: 400px;
+        }
+
+        margin: 1rem 0;
+        border-radius: 0.5rem;
+
+        &:hover {
+            cursor: pointer;
+            border: var(--pink-color) 1px solid;
+        }
+
+    }
+
+
+    .loveBtn {
+        position: absolute;
+        top: 5px;
+        right: 0;
+        color: var(--pink-color);
+        font-size: 1.5rem;
+        z-index: 100;
+        // width: 100px;
+        // height: 100px;
+        cursor: pointer;
+        transition: color 0.3s;
+        transform: rotate(15deg);
+        font-size: 30px;
+
+        &.animate {
+            animation: rotate 0.4s ease-in-out;
+        }
+    }
+
+    .productWrapper,
+    .productWrapper {
+        margin-right: 1rem;
+    }
+}

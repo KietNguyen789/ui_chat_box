@@ -1,0 +1,159 @@
+@keyframes sparkle {
+
+    0%,
+    100% {
+        filter: brightness(1);
+        transform: scale(1) rotate(0deg);
+    }
+
+    25% {
+        filter: brightness(1.5);
+        transform: scale(1.05) rotate(-5deg);
+    }
+
+    50% {
+        filter: brightness(2);
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    75% {
+        filter: brightness(1.5);
+        transform: scale(1.05) rotate(-3deg);
+    }
+}
+
+@keyframes sparkleFilter {
+
+    0%,
+    100% {
+        filter: brightness(1);
+        transform: scale(1) rotate(0deg);
+    }
+
+    25% {
+        filter: brightness(1.5);
+        transform: scale(2) rotate(-5deg);
+    }
+
+    50% {
+        filter: brightness(2);
+        transform: scale(1.5) rotate(5deg);
+    }
+
+    75% {
+        filter: brightness(1.5);
+        transform: scale(1.2) rotate(-3deg);
+    }
+}
+
+.headerWrapper {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    /* This aligns children vertically */
+    z-index: 9999;
+
+    /* Optional: some horizontal spacing */
+    background-image: url('https://commercial.static.antoree.com/assets/images/banner.jpg');
+    background-size: cover;
+    background-position: center;
+
+    .sparkleIcon {
+        animation: sparkle 2s infinite ease-in-out;
+        display: inline-block;
+    }
+
+    .iconstars {
+        font-size: 2rem;
+        color: #FFBF00;
+        margin-right: 10px;
+        position: absolute;
+        top: 0;
+        right: -50%;
+        z-index: 1000;
+
+
+    }
+
+    .iconSearchInput {
+        //font-size: 30px;
+        margin-right: 10px;
+        position: relative;
+
+        &:hover {
+            color: var(--pink-color);
+            cursor: pointer;
+            animation: sparkle 2s infinite ease-in-out;
+        }
+    }
+
+    .iconfilter {
+        //font-size: 30px;
+        margin-right: 10px;
+        position: relative;
+
+
+        &:hover {
+            color: var(--pink-color);
+            cursor: pointer;
+            animation: sparkleFilter 2s infinite ease-in-out;
+        }
+    }
+
+    .logo {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .BtnLove {
+
+        // background-color: transparent;
+        margin-left: 10px;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        //font-size: larger;
+        color: aliceblue;
+        transition: all 0.2s ease-in-out;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+            background-color: aliceblue;
+            color: var(--pink-color);
+            cursor: pointer;
+        }
+    }
+
+    .BtnMobile {
+        font-size: 10px;
+    }
+}
+
+.headerItem,
+.headerItem {
+    margin-right: 30px;
+
+
+}
+
+.ant-select>span {
+    height: 100% !important;
+    display: flex;
+    align-items: center;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    background-color: violet;
+
+}
+
+/* 🔧 This is the key fix */
+.selectCentered .ant-select-selection-placeholder {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
