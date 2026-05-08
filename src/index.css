@@ -32,12 +32,22 @@ a:hover {
   color: #535bf2;
 }
 
+html,
 body {
   margin: 0;
-  min-width: 320px;
+  padding: 0;
+  width: 100%;
   min-height: 100vh;
-  background-attachment: fixed;
+}
+
+body {
   background: linear-gradient(270deg, rgba(245, 86, 143, .15) .65%, hsla(0, 0%, 100%, .15) 100.65%);
+  background-attachment: fixed;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
 }
 
 h1 {
