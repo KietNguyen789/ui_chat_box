@@ -19,7 +19,7 @@
   --my-font: 'ShoppeFont';
   --font-mono: 'mono';
   --font-family-display: 'TikTokDisplayFont', sans-serif;
-
+  --header-height: 67px;
 }
 
 a {
