@@ -19,7 +19,7 @@
   --my-font: 'ShoppeFont';
   --font-mono: 'mono';
   --font-family-display: 'TikTokDisplayFont', sans-serif;
-  background: linear-gradient(270deg, rgba(245, 86, 143, .15) .65%, hsla(0, 0%, 100%, .15) 100.65%);
+
 }
 
 a {
@@ -41,7 +41,10 @@ body {
 }
 
 body {
-  background: linear-gradient(270deg, rgba(245, 86, 143, .15) .65%, hsla(0, 0%, 100%, .15) 100.65%);
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(255, 245, 240, 0.95) 45%,
+      rgba(255, 220, 210, 0.9) 100%);
   background-attachment: fixed;
 }
 
