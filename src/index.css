@@ -36,8 +36,8 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-
   background-attachment: fixed;
+  background: linear-gradient(270deg, rgba(245, 86, 143, .15) .65%, hsla(0, 0%, 100%, .15) 100.65%);
 }
 
 h1 {
