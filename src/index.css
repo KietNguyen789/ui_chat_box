@@ -7,7 +7,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: white;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -35,12 +34,10 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-
-
+  background: linear-gradient(270deg, rgba(245, 86, 143, .15) .65%, hsla(0, 0%, 100%, .15) 100.65%);
+  background-attachment: fixed;
 }
 
 h1 {
@@ -72,7 +69,6 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
   }
 
   a:hover {

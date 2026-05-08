@@ -19,7 +19,7 @@ function LoveProductPage() {
                     marginTop: '50px'
             }}
             >Sản Phẩm Yêu Thích</h1> */}
-            <div className={`${styles.dashboardContainer} w-screen h-screen flex flex-col lg:flex-row }`}>
+            <div className={`${styles.dashboardContainer} w-screen h-screen grid grid-cols-1 sm:grid-cols-5 gap-2 }`}>
                 {productStore.loveProducts.map((product: ProductModelWithLike, index) => (
                     <Product key={product.id} id={product.id} />
                 ))}

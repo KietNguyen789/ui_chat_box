@@ -7,12 +7,16 @@ import { type ChatCompletionMessageParam } from 'openai/resources/chat/completio
 import { productStore } from '../../store/product_store/product_store';
 import love_product from '../../pages/love_product/love_product';
 
-const openai = new OpenAI({
-    apiKey: import.meta.env.VITE_OPENAI_API_KEY as string,
-    organization: import.meta.env.VITE_ORG_ID as string,
-    project: import.meta.env.VITE_PROJECT_ID as string,
-    dangerouslyAllowBrowser: true,
-});
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY as string | undefined;
+
+const openai = apiKey
+    ? new OpenAI({
+        apiKey,
+        organization: import.meta.env.VITE_ORG_ID as string,
+        project: import.meta.env.VITE_PROJECT_ID as string,
+        dangerouslyAllowBrowser: true,
+    })
+    : null;
 
 
 function ChatBox() {
@@ -68,7 +72,10 @@ function ChatBox() {
         setLoading(true); // Show loading indicator
 
         try {
-            // Call OpenAI API
+            if (!openai) {
+                setMessages((prev) => [...prev, { role: 'assistant', content: 'Chưa cấu hình API key. Vui lòng thêm VITE_OPENAI_API_KEY vào file .env.' }]);
+                return;
+            }
             const completion = await openai.chat.completions.create({
                 model: 'gpt-4o-mini', // Using gpt-4o-mini as per your original request
                 messages: updatedMessages,

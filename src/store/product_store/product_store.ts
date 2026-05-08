@@ -43,6 +43,7 @@ class ProductStore {
     }
     setSearchQuery(query: string) {
         this.searchQuery = query.toLowerCase();
+        this.getfilteredProducts()
 
 
     }
@@ -50,7 +51,7 @@ class ProductStore {
         this.priceFilter = filter;
         console.log(this.priceFilter);
         console.log('is Array:', Array.isArray(filter));
-
+        this.getfilteredProducts()
 
     }
     get loveProducts() {

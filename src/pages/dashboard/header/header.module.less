@@ -1,159 +1,168 @@
-@keyframes sparkle {
-
-    0%,
-    100% {
-        filter: brightness(1);
-        transform: scale(1) rotate(0deg);
-    }
-
-    25% {
-        filter: brightness(1.5);
-        transform: scale(1.05) rotate(-5deg);
-    }
-
-    50% {
-        filter: brightness(2);
-        transform: scale(1.1) rotate(5deg);
-    }
-
-    75% {
-        filter: brightness(1.5);
-        transform: scale(1.05) rotate(-3deg);
-    }
-}
-
-@keyframes sparkleFilter {
-
-    0%,
-    100% {
-        filter: brightness(1);
-        transform: scale(1) rotate(0deg);
-    }
-
-    25% {
-        filter: brightness(1.5);
-        transform: scale(2) rotate(-5deg);
-    }
-
-    50% {
-        filter: brightness(2);
-        transform: scale(1.5) rotate(5deg);
-    }
-
-    75% {
-        filter: brightness(1.5);
-        transform: scale(1.2) rotate(-3deg);
-    }
-}
-
-.headerWrapper {
-
+.header {
     position: fixed;
     top: 0;
     left: 0;
-    display: flex;
-    align-items: center;
-    /* This aligns children vertically */
+    width: 100%;
     z-index: 9999;
-
-    /* Optional: some horizontal spacing */
-    background-image: url('https://commercial.static.antoree.com/assets/images/banner.jpg');
-    background-size: cover;
-    background-position: center;
-
-    .sparkleIcon {
-        animation: sparkle 2s infinite ease-in-out;
-        display: inline-block;
-    }
-
-    .iconstars {
-        font-size: 2rem;
-        color: #FFBF00;
-        margin-right: 10px;
-        position: absolute;
-        top: 0;
-        right: -50%;
-        z-index: 1000;
-
-
-    }
-
-    .iconSearchInput {
-        //font-size: 30px;
-        margin-right: 10px;
-        position: relative;
-
-        &:hover {
-            color: var(--pink-color);
-            cursor: pointer;
-            animation: sparkle 2s infinite ease-in-out;
-        }
-    }
-
-    .iconfilter {
-        //font-size: 30px;
-        margin-right: 10px;
-        position: relative;
-
-
-        &:hover {
-            color: var(--pink-color);
-            cursor: pointer;
-            animation: sparkleFilter 2s infinite ease-in-out;
-        }
-    }
-
-    .logo {
-        &:hover {
-            cursor: pointer;
-        }
-    }
-
-    .BtnLove {
-
-        // background-color: transparent;
-        margin-left: 10px;
-        background-color: transparent;
-        border: none;
-        outline: none;
-        //font-size: larger;
-        color: aliceblue;
-        transition: all 0.2s ease-in-out;
-        display: flex;
-        align-items: center;
-
-        &:hover {
-            background-color: aliceblue;
-            color: var(--pink-color);
-            cursor: pointer;
-        }
-    }
-
-    .BtnMobile {
-        font-size: 10px;
-    }
+    background: #ffffff;
+    border-bottom: 1px solid #e8e8e8;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
-.headerItem,
-.headerItem {
-    margin-right: 30px;
-
-
-}
-
-.ant-select>span {
-    height: 100% !important;
+.inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 64px;
+    padding: 0 24px;
     display: flex;
     align-items: center;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    background-color: violet;
-
+    gap: 16px;
 }
 
-/* 🔧 This is the key fix */
-.selectCentered .ant-select-selection-placeholder {
+/* Logo */
+.logo {
+    flex-shrink: 0;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    height: 100%;
+    height: 40px;
+    transition: opacity 0.2s;
+
+    img {
+        height: 100%;
+        width: auto;
+        object-fit: contain;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+/* Search */
+.searchWrap {
+    flex: 1;
+    max-width: 480px;
+}
+
+.searchInput {
+    border-radius: 8px !important;
+    height: 40px !important;
+    border-color: #d9d9d9 !important;
+    font-size: 14px !important;
+    transition: box-shadow 0.2s, border-color 0.2s !important;
+
+    &:hover,
+    &:focus-within {
+        border-color: #1677ff !important;
+        box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.1) !important;
+    }
+}
+
+.searchIcon {
+    color: #8c8c8c;
+    font-size: 15px;
+    margin-right: 4px;
+}
+
+/* Filter */
+.filterWrap {
+    flex-shrink: 0;
+    width: 200px;
+}
+
+.filterSelect {
+    width: 100% !important;
+    height: 40px !important;
+
+    :global(.ant-select-selector) {
+        border-radius: 8px !important;
+        height: 40px !important;
+        display: flex !important;
+        align-items: center !important;
+        border-color: #d9d9d9 !important;
+        transition: border-color 0.2s, box-shadow 0.2s !important;
+    }
+
+    &:hover :global(.ant-select-selector) {
+        border-color: #1677ff !important;
+    }
+
+    :global(.ant-select-focused .ant-select-selector) {
+        box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.1) !important;
+    }
+}
+
+.filterPlaceholder {
+    color: #8c8c8c;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Nav */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.navBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 16px;
+    height: 40px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+
+    i {
+        font-size: 15px;
+    }
+
+    &:hover {
+        background: #f0f5ff;
+        color: #1677ff;
+        border-color: #bfdbfe;
+    }
+
+    &:active {
+        background: #dbeafe;
+    }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .inner {
+        padding: 0 12px;
+        gap: 8px;
+    }
+
+    .logo img {
+        height: 28px;
+    }
+
+    .filterWrap {
+        display: none;
+    }
+
+    .navBtn span {
+        display: none;
+    }
+
+    .navBtn {
+        padding: 0 10px;
+        width: 40px;
+        justify-content: center;
+    }
 }

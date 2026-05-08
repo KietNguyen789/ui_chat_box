@@ -14,7 +14,7 @@ const BareLayout: React.FC = () => {
                 <i className={`bi bi-bag-fill mb-[10px] ${styles.bag}`} style={{
                     fontSize: '50px', color: 'orange', position: 'fixed',
                     bottom: '80px',
-                    right: '23px',
+                    right: '31px',
 
                 }} />
                 <ChatBox />

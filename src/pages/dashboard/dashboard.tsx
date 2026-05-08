@@ -1,6 +1,5 @@
 import Product from './product_component/product'
 import type { ProductProps } from './product_component/productModel'
-import { Header } from './header/header'
 import styles from './dashboard.module.less'
 import type { ProductModelWithLike } from './product_component/productModel';
 import { useEffect, useRef, useState } from 'react';
@@ -155,6 +154,7 @@ function Dashboard() {
                 setListProducts(parsed);
             } catch (error) {
                 console.error("Lỗi:", error);
+                setListProducts(listProducts2)
             }
         };
 
@@ -173,13 +173,18 @@ function Dashboard() {
     }, [listProducts.length]);
 
     return (
-        <div>
-
-            <div className={`${styles.dashboardContainer} w-screen h-screen flex flex-col lg:flex-row }`}>
-                {productStore.filteredProducts.map((product: ProductModelWithLike, index) => (
-                    <Product key={product.id} id={product.id} />
-                ))}
-            </div>
+        <div className={styles.page}>
+            <main className={styles.main}>
+                <div className={styles.sectionTitle}>
+                    <h2>Khóa học nổi bật</h2>
+                    <p>Khám phá các chương trình học phù hợp với mọi lứa tuổi</p>
+                </div>
+                <div className={styles.grid}>
+                    {productStore.filteredProducts.map((product: ProductModelWithLike) => (
+                        <Product key={product.id} id={product.id} />
+                    ))}
+                </div>
+            </main>
         </div>
     )
 }
