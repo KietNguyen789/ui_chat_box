@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import type { ProductModelWithLike } from "../../pages/dashboard/product_component/productModel";
+import type { CommentProps } from "../../pages/dashboard/product_component/comment/commentModel";
 
 export const priceFilter = ["all", "<500K", "500K-1M", ">1M"];
 export type SortOption = 'default' | 'price_asc' | 'price_desc' | 'name_asc';
@@ -102,8 +103,17 @@ class ProductStore {
         }
     }
 
-    showProduct() {
-        console.log('filter Products:', this.filteredProducts);
+    addComment(productId: number, comment: Omit<CommentProps, 'id' | 'productId' | 'createdAt' | 'updatedAt'>) {
+        const product = this.products.find(p => p.id === productId);
+        if (!product) return;
+        const newComment: CommentProps = {
+            ...comment,
+            id: Date.now(),
+            productId,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+        };
+        product.comments = [newComment, ...product.comments];
     }
 }
 

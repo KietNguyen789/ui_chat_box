@@ -1,12 +1,13 @@
 import styles from './header.module.less';
-import { Input, Select } from "antd";
+import { Input, Select, Badge } from "antd";
 import { useStores } from '../../../store/store_context';
 import { priceFilter, type SortOption } from '../../../store/product_store/product_store';
 import { useNavigate } from 'react-router-dom';
 import { PAGE_ROUTES } from '../../../constants/route';
+import { observer } from 'mobx-react-lite';
 
-export function Header() {
-    const { productStore } = useStores();
+function HeaderComponent() {
+    const { productStore, cartStore } = useStores();
     const navigate = useNavigate();
 
     return (
@@ -64,22 +65,24 @@ export function Header() {
 
                 {/* Nav actions */}
                 <nav className={styles.nav}>
-                    <button
-                        className={styles.navBtn}
-                        onClick={() => navigate(PAGE_ROUTES.LOVEPRODUCT)}
-                    >
+                    <button className={styles.navBtn} onClick={() => navigate(PAGE_ROUTES.LOVEPRODUCT)}>
                         <i className="bi bi-heart" />
                         <span>Yêu thích</span>
                     </button>
-                    <button
-                        className={styles.navBtn}
-                        onClick={() => navigate(PAGE_ROUTES.HISTORY)}
-                    >
+                    <button className={styles.navBtn} onClick={() => navigate(PAGE_ROUTES.HISTORY)}>
                         <i className="bi bi-clock-history" />
                         <span>Lịch sử</span>
+                    </button>
+                    <button className={`${styles.navBtn} ${styles.cartBtn}`} onClick={() => navigate(PAGE_ROUTES.CART)}>
+                        <Badge count={cartStore.totalItems} size="small" color="#f5568f">
+                            <i className="bi bi-cart3" style={{ fontSize: 18 }} />
+                        </Badge>
+                        <span>Giỏ hàng</span>
                     </button>
                 </nav>
             </div>
         </header>
     );
 }
+
+export const Header = observer(HeaderComponent);

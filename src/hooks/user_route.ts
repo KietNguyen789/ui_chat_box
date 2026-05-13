@@ -1,5 +1,4 @@
 import { PAGE_ROUTES } from '../constants/route';
-import { t } from 'i18next';
 import { lazy } from 'react';
 
 export type RouteType = {
@@ -15,42 +14,24 @@ export type RouteType = {
 const LoginPage = lazy(() => import('../pages/login/login'));
 const DashboardPage = lazy(() => import('../pages/dashboard/dashboard'));
 const lovedProductsPage = lazy(() => import('../pages/love_product/love_product'));
-const historyPage = lazy(() => import('../pages/history/history'))
+const historyPage = lazy(() => import('../pages/history/history'));
+const cartPage = lazy(() => import('../pages/cart/cart'));
+const checkoutPage = lazy(() => import('../pages/checkout/checkout'));
 
 const useRoutes = () => {
     const publicRoutes: RouteType[] = [
-        {
-            path: PAGE_ROUTES.LOGIN,
-            element: LoginPage
-        }
+        { path: PAGE_ROUTES.LOGIN, element: LoginPage },
     ];
-
 
     const privateRoutes: RouteType[] = [
-        {
-            path: PAGE_ROUTES.DASHBOARD,
-            element: DashboardPage,
-            title: 'heelo',//`${t(i18nKey.title.dashboard)}`,
-            breadcrumb: ['heelo 1234']//[`${t(i18nKey.title.dashboard)}`]
-        },
-        {
-            path: PAGE_ROUTES.LOVEPRODUCT,
-            element: lovedProductsPage,
-            title: 'heelo',//`${t(i18nKey.title.dashboard)}`,
-            breadcrumb: ['heelo 1234']//[`${t(i18nKey.title.dashboard)}`]
-        },
-        {
-            path: PAGE_ROUTES.HISTORY,
-            element: historyPage,
-            title: 'heelo',//`${t(i18nKey.title.dashboard)}`,
-            breadcrumb: ['heelo 1234']//[`${t(i18nKey.title.dashboard)}`]
-        },
-
+        { path: PAGE_ROUTES.DASHBOARD, element: DashboardPage },
+        { path: PAGE_ROUTES.LOVEPRODUCT, element: lovedProductsPage },
+        { path: PAGE_ROUTES.HISTORY, element: historyPage },
+        { path: PAGE_ROUTES.CART, element: cartPage },
+        { path: PAGE_ROUTES.CHECKOUT, element: checkoutPage },
     ];
 
-    const routes = [...publicRoutes, ...privateRoutes];
-
-    return { publicRoutes, privateRoutes, routes };
+    return { publicRoutes, privateRoutes, routes: [...publicRoutes, ...privateRoutes] };
 };
 
 export default useRoutes;
