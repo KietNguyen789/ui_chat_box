@@ -1,68 +1,82 @@
-.chatBoxWrapper {
+.chatBox {
+
     position: fixed;
-    bottom: 0;
-    right: 0;
-    width: 550px;
-    height: 750px;
-    background-color: transparent;
-    z-index: 1000;
+    /* tương ứng với 'fixed' */
+    right: 16px;
+    /* tương ứng với 'right-4' (4 * 4px) */
+    bottom: 16px;
+    /* tương ứng với 'bottom-4' (4 * 4px) */
+    z-index: 2000;
+    /* tương ứng với 'z-50' */
 
-    .chatBox {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        /* Pushes input to bottom */
-        border-radius: 8px;
-        padding: 10px;
-
-    }
-
-    .messageArea {
-        flex: 1;
-        overflow-y: auto;
-        padding: 10px;
-    }
-
-    .InputChat {
-        position: absolute;
-        height: 50px;
-        z-index: inherit;
+    .chatBoxWrapper {
+        position: fixed;
         bottom: 0;
-        left: 0;
-        font-size: larger;
+        right: 0;
+        width: 550px;
+        height: 750px;
+        background-color: transparent;
+        z-index: 1000;
 
-        .sendBtn {
-            font-size: large;
+        .chatBox {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            /* Pushes input to bottom */
+            border-radius: 8px;
+            padding: 10px;
 
-            &:hover {
-                cursor: pointer;
-                color: var(--pink-color);
+        }
+
+        .messageArea {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            z-index: 2000;
+
+        }
+
+        .InputChat {
+            position: absolute;
+            height: 50px;
+            z-index: inherit;
+            bottom: 0;
+            left: 0;
+            font-size: larger;
+
+            .sendBtn {
+                font-size: large;
+
+                &:hover {
+                    cursor: pointer;
+                    color: var(--pink-color);
+                }
             }
         }
-    }
 
-    .chatBoxImage {
-        cursor: pointer;
-        z-index: inherit;
+        .chatBoxImage {
+            cursor: pointer;
+            z-index: inherit;
 
-        &:hover {
-            transform: scale(1.05);
+            &:hover {
+                transform: scale(1.05);
+            }
         }
+
+        .closeIcon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: inherit;
+            color: red;
+
+        }
+
     }
-
-    .closeIcon {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        font-size: 20px;
-        cursor: pointer;
-        z-index: inherit;
-        color: red;
-
-    }
-
 }

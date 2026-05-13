@@ -12,7 +12,10 @@ const BareLayout: React.FC = () => {
         <Layout className={styles.container}>
             <Header />
             <Outlet />
+
             <CartDrawer />
+
+
             <ChatBox />
         </Layout>
     );

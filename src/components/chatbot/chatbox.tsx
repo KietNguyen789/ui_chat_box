@@ -100,7 +100,8 @@ function ChatBox() {
     };
 
     return (
-        <div className={`fixed bottom-4 right-4 z-50`}>
+        //'fixed right-4 bottom-4 z-50'
+        <div className={styles.chatBox}>
             {isOpen && (
                 <div
                     className={`
