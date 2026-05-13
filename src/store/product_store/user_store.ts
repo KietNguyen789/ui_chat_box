@@ -1,34 +1,37 @@
 import { makeAutoObservable } from "mobx";
-import type { ProductModelWithLike } from "../../pages/dashboard/product_component/productModel";
 
-export const priceFilter = ["all", "<500K", "500K-1M", ">1M"];
+const HISTORY_KEY = 'view_history';
 
 class UserStore {
     list_click: number[] = [];
-    love_pro: string[] = [];
 
     constructor() {
         makeAutoObservable(this);
+        const saved = localStorage.getItem(HISTORY_KEY);
+        if (saved) {
+            try {
+                this.list_click = JSON.parse(saved);
+            } catch {
+                this.list_click = [];
+            }
+        }
     }
 
     addNewId(product_id: number) {
         if (!this.list_click.includes(product_id)) {
-            this.list_click = [...this.list_click, product_id]
-            console.log('addList: ', this.list_click);
-
+            this.list_click = [...this.list_click, product_id];
+            localStorage.setItem(HISTORY_KEY, JSON.stringify(this.list_click));
         }
-        else return
-
     }
 
     get getListClick() {
-        console.log(this.list_click);
-
-        return this.list_click
+        return this.list_click;
     }
 
-
-
+    clearHistory() {
+        this.list_click = [];
+        localStorage.removeItem(HISTORY_KEY);
+    }
 }
 
 export const userStore = new UserStore();

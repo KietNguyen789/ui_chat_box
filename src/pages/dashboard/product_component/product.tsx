@@ -1,6 +1,6 @@
 import styles from './product.module.less';
 import type { ProductModelWithLike } from './productModel';
-import { Modal } from 'antd';
+import { Modal, message } from 'antd';
 import { useState } from 'react';
 import { CommentProductComponent } from './comment/comment';
 import { useStores } from '../../../store/store_context';
@@ -21,20 +21,24 @@ function Product({ id }: { id: number }) {
 
     const toggleLike = (e: React.MouseEvent) => {
         e.stopPropagation();
+        const willLike = !product.isLiked;
         productStore.toggleLike(product.id);
         setAnimate(true);
         setTimeout(() => setAnimate(false), 400);
+        if (willLike) {
+            message.success({ content: 'Đã thêm vào yêu thích', icon: <i className="bi bi-heart-fill" style={{ color: '#f5568f', marginRight: 8 }} /> });
+        } else {
+            message.info({ content: 'Đã bỏ khỏi yêu thích', icon: <i className="bi bi-heart" style={{ marginRight: 8 }} /> });
+        }
     };
 
     return (
         <div className={styles.wrapper}>
-            {/* Like button */}
             <i
                 className={`${styles.loveBtn} bi ${product.isLiked ? 'bi-heart-fill' : 'bi-heart'} ${animate ? styles.animate : ''}`}
                 onClick={toggleLike}
             />
 
-            {/* Card body */}
             <div className={styles.productWrapper} onClick={handleClick}>
                 <div className={styles.imageWrap}>
                     <img src={product.img} alt={product.name} />

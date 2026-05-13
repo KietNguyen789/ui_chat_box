@@ -2,11 +2,14 @@ import { makeAutoObservable } from "mobx";
 import type { ProductModelWithLike } from "../../pages/dashboard/product_component/productModel";
 
 export const priceFilter = ["all", "<500K", "500K-1M", ">1M"];
+export type SortOption = 'default' | 'price_asc' | 'price_desc' | 'name_asc';
+
+const LIKED_KEY = 'liked_products';
 
 function normalizeText(text: string) {
     return text
-        .normalize("NFD")                     // Normalize to decomposed form
-        .replace(/[\u0300-\u036f]/g, "")     // Remove diacritics
+        .normalize("NFD")
+        .replace(/[̀-ͯ]/g, "")
         .toLowerCase()
         .trim();
 }
@@ -16,7 +19,7 @@ class ProductStore {
     filteredProducts: ProductModelWithLike[] = [];
     searchQuery: string = '';
     priceFilter: string[] = [];
-
+    sortBy: SortOption = 'default';
 
     constructor() {
         makeAutoObservable(this);
@@ -26,34 +29,30 @@ class ProductStore {
         return this.products.find(product => product.id === id);
     }
 
-
-
-    // Initialize products (e.g., from static list or API)
     setProducts(initialProducts: Omit<ProductModelWithLike, 'isLiked'>[]) {
-
-
-        this.products = initialProducts.map(product => {
-            const existingProduct = this.products.find(p => p.id === product.id);
-            return {
-                ...product,
-                isLiked: existingProduct?.isLiked ?? false
-            };
-        });;
+        const savedLiked: number[] = JSON.parse(localStorage.getItem(LIKED_KEY) || '[]');
+        this.products = initialProducts.map(product => ({
+            ...product,
+            isLiked: savedLiked.includes(product.id),
+        }));
         this.filteredProducts = [...this.products];
     }
+
     setSearchQuery(query: string) {
         this.searchQuery = query.toLowerCase();
-        this.getfilteredProducts()
-
-
+        this.getfilteredProducts();
     }
-    setPriceFilter(filter: any) {
+
+    setPriceFilter(filter: string[]) {
         this.priceFilter = filter;
-        console.log(this.priceFilter);
-        console.log('is Array:', Array.isArray(filter));
-        this.getfilteredProducts()
-
+        this.getfilteredProducts();
     }
+
+    setSortBy(sort: SortOption) {
+        this.sortBy = sort;
+        this.getfilteredProducts();
+    }
+
     get loveProducts() {
         return this.products.filter(product => product.isLiked);
     }
@@ -65,43 +64,46 @@ class ProductStore {
             const normalizedName = normalizeText(product.name);
             const matchName = normalizedQuery === '' || normalizedName.includes(normalizedQuery);
 
-
-            // Skip price filtering if 'all' is selected
-            if (this.priceFilter.includes("all")) {
+            if (this.priceFilter.includes("all") || this.priceFilter.length === 0) {
                 return matchName;
             }
-            // Check if any of the selected price ranges match the product
+
             const matchPrice = this.priceFilter.some(priceRange => {
                 switch (priceRange) {
-                    case "<500K":
-                        return product.price < 500_000;
-                    case "500K-1M":
-                        return product.price >= 500_000 && product.price <= 1_000_000;
-                    case ">1M":
-                        return product.price > 1_000_000;
-                    default:
-                        return false;
+                    case "<500K": return product.price < 500_000;
+                    case "500K-1M": return product.price >= 500_000 && product.price <= 1_000_000;
+                    case ">1M": return product.price > 1_000_000;
+                    default: return false;
                 }
             });
 
-            const nofilter = this.priceFilter.length === 0;
-
-            return matchName && (matchPrice || nofilter);
+            return matchName && matchPrice;
         });
-        console.log('Filtered products:', this.filteredProducts);
 
-    }
-
-    showProduct() {
-        console.log('filter Products:', this.filteredProducts);
-
+        switch (this.sortBy) {
+            case 'price_asc':
+                this.filteredProducts.sort((a, b) => a.price - b.price);
+                break;
+            case 'price_desc':
+                this.filteredProducts.sort((a, b) => b.price - a.price);
+                break;
+            case 'name_asc':
+                this.filteredProducts.sort((a, b) => a.name.localeCompare(b.name, 'vi'));
+                break;
+        }
     }
 
     toggleLike(productId: number) {
         const product = this.products.find(p => p.id === productId);
         if (product) {
             product.isLiked = !product.isLiked;
+            const likedIds = this.products.filter(p => p.isLiked).map(p => p.id);
+            localStorage.setItem(LIKED_KEY, JSON.stringify(likedIds));
         }
+    }
+
+    showProduct() {
+        console.log('filter Products:', this.filteredProducts);
     }
 }
 

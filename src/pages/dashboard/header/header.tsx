@@ -1,7 +1,7 @@
 import styles from './header.module.less';
 import { Input, Select } from "antd";
 import { useStores } from '../../../store/store_context';
-import { priceFilter } from '../../../store/product_store/product_store';
+import { priceFilter, type SortOption } from '../../../store/product_store/product_store';
 import { useNavigate } from 'react-router-dom';
 import { PAGE_ROUTES } from '../../../constants/route';
 
@@ -44,7 +44,21 @@ export function Header() {
                         onChange={(value) => productStore.setPriceFilter(value)}
                         options={priceFilter.map((price) => ({ label: price, value: price }))}
                         className={styles.filterSelect}
-                        popupClassName={styles.filterDropdown}
+                    />
+                </div>
+
+                {/* Sort */}
+                <div className={styles.sortWrap}>
+                    <Select
+                        defaultValue="default"
+                        onChange={(value: SortOption) => productStore.setSortBy(value)}
+                        className={styles.filterSelect}
+                        options={[
+                            { label: '⇅ Mặc định', value: 'default' },
+                            { label: '↑ Giá thấp', value: 'price_asc' },
+                            { label: '↓ Giá cao', value: 'price_desc' },
+                            { label: 'A–Z Tên', value: 'name_asc' },
+                        ]}
                     />
                 </div>
 
