@@ -7,13 +7,15 @@ import { useStores } from '../../../store/store_context';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 import { PAGE_ROUTES } from '../../../constants/route';
+import { translateCourseName } from '../../../constants/translations';
 
 function Product({ id }: { id: number }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [animate, setAnimate] = useState(false);
-    const { productStore, userStore, cartStore } = useStores();
+    const { productStore, userStore, cartStore, authStore } = useStores();
     const navigate = useNavigate();
     const product: ProductModelWithLike = productStore.getProduct(id) as ProductModelWithLike;
+    const displayName = translateCourseName(product?.name ?? '', authStore.language);
 
     const handleClick = () => {
         userStore.addNewId(product.id);
@@ -61,7 +63,7 @@ function Product({ id }: { id: number }) {
                     <img src={product.img} alt={product.name} />
                 </div>
                 <div className={styles.body}>
-                    <div className={styles.name}>{product.name}</div>
+                    <div className={styles.name}>{displayName}</div>
                     <div className={styles.des}>{product.des}</div>
                 </div>
                 <div className={styles.footer}>

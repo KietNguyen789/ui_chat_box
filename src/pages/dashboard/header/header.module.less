@@ -151,6 +151,55 @@
     }
 }
 
+/* Login button */
+.loginBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 16px;
+    height: 36px;
+    border: 1.5px solid #f5568f;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f5568f, #ff8c69);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+
+    i { font-size: 16px; }
+
+    &:hover { opacity: 0.88; }
+}
+
+/* Profile avatar */
+.avatarWrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: background 0.2s;
+
+    &:hover { background: #f9fafb; }
+}
+
+.avatar {
+    border: 2px solid #f5568f;
+    flex-shrink: 0;
+}
+
+.avatarName {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    white-space: nowrap;
+
+    @media (max-width: 768px) { display: none; }
+}
+
 /* Responsive */
 @media (max-width: 640px) {
     .inner {
